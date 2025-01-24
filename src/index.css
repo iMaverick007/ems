@@ -1,0 +1,19 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  color: white;
+}
+
+body {
+  background-color: black;
+}
+
+#task-list::-webkit-scrollbar {
+  display: none;
+}
+
+#task-list-numbers::-webkit-scrollbar {
+  display: none;
+}
