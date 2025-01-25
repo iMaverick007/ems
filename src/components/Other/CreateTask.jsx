@@ -2,6 +2,7 @@ import React, { useContext, useState } from 'react';
 import { AuthContext } from '../../context/AuthProvider';
 
 const CreateTask = () => {
+
   const [userData, setUserData] = useContext(AuthContext);
   const [taskTitle, setTaskTitle] = useState('');
   const [taskDescription, setTaskDescription] = useState('');
@@ -87,7 +88,7 @@ const CreateTask = () => {
 
 const InputField = ({ label, type, value, onChange, placeholder }) => (
   <div>
-    <label className='text-sm text-gray-300 mb-0.5'>{label}</label><br/>
+    <label className='text-sm text-gray-300 mb-0.5'>{label}</label><br />
     <input
       type={type}
       value={value}

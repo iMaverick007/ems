@@ -2,12 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
-* {
-  color: white;
-}
-
 body {
-  background-color: black;
+  color: white;
 }
 
 #task-list::-webkit-scrollbar {
@@ -16,4 +12,12 @@ body {
 
 #task-list-numbers::-webkit-scrollbar {
   display: none;
+}
+
+#toggle-button {
+  position: absolute;
+  top: 60px;
+  left: 200px;
+  padding: 8px;
+  border-radius: 5px;
 }

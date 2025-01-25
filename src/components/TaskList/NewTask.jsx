@@ -1,18 +1,32 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { AuthContext } from '../../context/AuthProvider';
+import { updateTaskStatus } from '../../utils/taskUtils';
+import TaskCard from './TaskCard';
 
-const NewTask = ({ data }) => {
+const NewTask = ({ data, loggedInUser }) => {
+  const [userData, setUserData] = useContext(AuthContext);
+
+  const updateTaskStatusToAccept = (taskData) => {
+    const updatedUserData = updateTaskStatus(
+      userData,
+      loggedInUser,
+      taskData,
+      {
+        newTask: userData.find(u => u.firstName === loggedInUser).taskCounts.newTask - 1,
+        active: userData.find(u => u.firstName === loggedInUser).taskCounts.active + 1,
+      },
+      { active: true, newTask: false }
+    );
+
+    setUserData(updatedUserData);
+  };
+
   return (
-    <div className='flex-shrink-0 h-full w-[300px] p-5 bg-blue-400 rounded-xl'>
-      <div className='flex justify-between items-center'>
-        <h3 className='bg-red-600 text-sm px-3 py-1 rounded'>{data.category}</h3>
-        <h4 className='text-sm'>{data.taskDate}</h4>
-      </div>
-      <h2 className='mt-5 text-2xl font-semibold'>{data.taskTitle}</h2>
-      <p className='text-sm mt-2'>{data.taskDescription}</p>
-      <div className='mt-6'>
-        <button className='bg-blue-500 rounded font-medium py-1 px-2 text-xs'>Accept Task</button>
-      </div>
-    </div>
+    <TaskCard
+      data={data}
+      bgColor="bg-blue-400"
+      primaryAction={{ label: "Accept Task", onClick: updateTaskStatusToAccept }}
+    />
   );
 };
 
